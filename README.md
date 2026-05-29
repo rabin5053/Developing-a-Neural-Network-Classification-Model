@@ -11,27 +11,33 @@ In their existing market, the sales team has classified all customers into 4 seg
 You are required to help the manager to predict the right group of the new customers.
 
 ## Neural Network Model
-<img width="720" height="637" alt="image" src="https://github.com/user-attachments/assets/d01441f7-b766-4808-8cd1-7dfb94882674" />
-
+<img width="686" height="724" alt="image" src="https://github.com/user-attachments/assets/d71a6bdc-16f5-4cdc-a4ee-7158be520966" />
 
 ## DESIGN STEPS
-## Step 1: Load and Preprocess Data
+### STEP 1: 
+
 Load the dataset, remove irrelevant columns (ID), handle missing values, encode categorical features using Label Encoding, and encode the target class (Segmentation).
 
-## Step 2: Feature Scaling and Data Split
+### STEP 2: 
+
 Split the dataset into training and testing sets, then normalize the input features using StandardScaler for better neural network performance.
 
-# Step 3: Convert Data to PyTorch Tensors
+### STEP 3: 
+
 Convert the scaled training and testing data into PyTorch tensors and create DataLoader objects for batch-wise training and evaluation.
 
-# Step 4: Define the Neural Network Model
+### STEP 4: 
+
 Design a feedforward neural network with multiple fully connected layers and ReLU activation functions, ending with an output layer for multi-class classification.
 
-# Step 5: Train the Model
+### STEP 5: 
+
 Train the model using CrossEntropyLoss and Adam optimizer by performing forward propagation, loss calculation, backpropagation, and weight updates over multiple epochs.
 
-# Step 6: Evaluate and Predict
+### STEP 6: 
+
 Evaluate the trained model on test data using accuracy, confusion matrix, and classification report, and perform prediction on a sample input.
+
 
 
 ## PROGRAM
@@ -44,58 +50,53 @@ Evaluate the trained model on test data using accuracy, confusion matrix, and cl
 class PeopleClassifier(nn.Module):
     def __init__(self, input_size):
         super(PeopleClassifier, self).__init__()
+        #Include your code here
         self.fc1 = nn.Linear(input_size,32)
         self.fc2 = nn.Linear(32,16)
         self.fc3 = nn.Linear(16,8)
         self.fc4 = nn.Linear(8,4)
-
     def forward(self, x):
-      x = F.relu(self.fc1(x))
-      x = F.relu(self.fc2(x))
-      x = F.relu(self.fc3(x))
-      x= self.fc4(x)
-      return x
+        #Include your code here
+        x = F.relu(self.fc1(x))
+        x = F.relu(self.fc2(x))
+        x = F.relu(self.fc3(x))
+        x = self.fc4(x)
+        return x       
         
-model =PeopleClassifier(input_size=X_train.shape[1])
-criterion =nn.CrossEntropyLoss()
-optimizer =optim.Adam(model.parameters(),lr=0.001)
+# Initialize the Model, Loss Function, and Optimizer
+model = PeopleClassifier(input_size=X_train.shape[1])
+criterion = nn.CrossEntropyLoss()
+optimizer = optim.Adam(model.parameters(),lr=0.001)
 
 def train_model(model, train_loader, criterion, optimizer, epochs):
-  model.train()
-  for epoch in range(epoch):
-    for inputs, labels in train_loader:
-      optimizer.zero_grad()
-      outputs = model(inputs)
-      loss = criterion(outputs, labels)
-      loss.backward()
-      optimizer.step()
-
+    #Include your code here
+    model.train()
+    for epoch in range(epochs):
+      for inputs, labels in train_loader:
+        optimizer.zero_grad()
+        outputs = model(inputs)
+        loss = criterion(outputs. labels)
+        loss.backward()
+        optimizer.step()
     if (epoch + 1) % 10 == 0:
         print(f'Epoch [{epoch+1}/{epochs}], Loss: {loss.item():.4f}')
 
 ```
 
 ### Dataset Information
-<img width="1274" height="250" alt="image" src="https://github.com/user-attachments/assets/c8adfdb0-5f3f-40d0-b453-421277679a6e" />
+<img width="1182" height="432" alt="image" src="https://github.com/user-attachments/assets/22d457e5-9bc9-40fa-8a6b-45eb8498e56d" />
 
 
 ### OUTPUT
-<img width="805" height="223" alt="image" src="https://github.com/user-attachments/assets/9f9fe1a5-fede-4539-9035-be0cc5c9674e" />
-
 
 ## Confusion Matrix
-
-<img width="887" height="567" alt="image" src="https://github.com/user-attachments/assets/8f2f1454-bab5-4091-b1bb-06a90623d42b" />
+<img width="508" height="425" alt="image" src="https://github.com/user-attachments/assets/8cf7b8bd-e995-4843-a382-a12294267b9d" />
 
 
 ## Classification Report
+<img width="508" height="425" alt="image" src="https://github.com/user-attachments/assets/82ffda6f-47c0-47fc-93b3-789305586151" />
 
-<img width="1089" height="439" alt="image" src="https://github.com/user-attachments/assets/701198af-3b0f-4bdc-be85-7abded4f4b99" />
-
-### New Sample Data Prediction
-
-<img width="671" height="95" alt="image" src="https://github.com/user-attachments/assets/d1594818-7ab2-473a-aa95-2bba4af97ce1" />
 
 
 ## RESULT
-This program has been executed successfully.
+Neural network classification model for the given dataset is successfully developed.
